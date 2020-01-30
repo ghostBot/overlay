@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -14,6 +14,7 @@ HOMEPAGE="https://keepassxc.org"
 if [[ "${PV}" != 9999 ]] ; then
 	SRC_URI="https://github.com/keepassxreboot/keepassxc/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="amd64 x86"
+	PATCHES=("${FILESDIR}/qt5_buttonfix.patch")
 else
 	EGIT_REPO_URI="https://github.com/keepassxreboot/${PN}"
 fi

@@ -1,0 +1,11 @@
+diff -Nuar keepassxc-2.2.4.orig/src/gui/entry/EditEntryWidget.cpp keepassxc-2.2.4/src/gui/entry/EditEntryWidget.cpp
+--- keepassxc-2.2.4.orig/src/gui/entry/EditEntryWidget.cpp	2017-12-13 17:58:56.000000000 +0000
++++ keepassxc-2.2.4/src/gui/entry/EditEntryWidget.cpp	2020-01-30 17:59:51.196895184 +0000
+@@ -28,6 +28,7 @@
+ #include <QMenu>
+ #include <QSortFilterProxyModel>
+ #include <QTemporaryFile>
++#include <QButtonGroup>
+ 
+ #include "core/Config.h"
+ #include "core/Database.h"
