@@ -1,0 +1,38 @@
+diff -Nuar a/Makefile b/Makefile
+--- a/Makefile	2019-11-28 15:34:29.604222361 +0400
++++ b/Makefile	2019-11-28 15:36:18.987220418 +0400
+@@ -134,22 +134,13 @@
+ 	mkdir -m $(DIR_PERM) -p $(DISCORD_DEST)
+ 	install -m $(LIB_PERM) -p $(DISCORD_TARGET) $(DISCORD_DEST)
+ 
+-discord16.png: discord-alt-logo.svg
+-	convert -strip -background none discord-alt-logo.svg -resize 16x16 discord16.png
+-
+-discord22.png: discord-alt-logo.svg
+-	convert -strip -background none discord-alt-logo.svg -resize 22x22 discord22.png
+-
+-discord48.png: discord-alt-logo.svg
+-	convert -strip -background none discord-alt-logo.svg -resize 48x48 discord48.png
+-
+-install-icons: discord16.png discord22.png discord48.png
++install-icons:
+ 	mkdir -m $(DIR_PERM) -p $(DISCORD_ICONS_DEST)/16
+ 	mkdir -m $(DIR_PERM) -p $(DISCORD_ICONS_DEST)/22
+ 	mkdir -m $(DIR_PERM) -p $(DISCORD_ICONS_DEST)/48
+-	install -m $(FILE_PERM) -p discord16.png $(DISCORD_ICONS_DEST)/16/discord.png
+-	install -m $(FILE_PERM) -p discord22.png $(DISCORD_ICONS_DEST)/22/discord.png
+-	install -m $(FILE_PERM) -p discord48.png $(DISCORD_ICONS_DEST)/48/discord.png
++	install -m $(FILE_PERM) -p ${FILESDIR}/discord16.png $(DISCORD_ICONS_DEST)/16/discord.png
++	install -m $(FILE_PERM) -p ${FILESDIR}/discord22.png $(DISCORD_ICONS_DEST)/22/discord.png
++	install -m $(FILE_PERM) -p ${FILESDIR}/discord48.png $(DISCORD_ICONS_DEST)/48/discord.png
+ 
+ install-locales: $(patsubst po/%.po, %-locale-install, $(wildcard po/*.po))
+ 
+@@ -158,7 +149,6 @@
+ 
+ clean:
+ 	rm -f $(DISCORD_TARGET)
+-	rm -f discord*.png
+ 
+ gdb:
+ 	gdb --args pidgin -c ~/.fake_purple -n -m
