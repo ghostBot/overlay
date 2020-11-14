@@ -3,10 +3,10 @@
 
 EAPI=7
 
-inherit desktop xdg cmake
+inherit git-r3 desktop xdg cmake
 
-MY_PN="MultiMC5"
-MY_P="${MY_PN}-Cracked-${PV}"
+EGIT_REPO_URI="https://github.com/AfoninZ/MultiMC5-Cracked"
+EGIT_COMMIT="ae8cb60f3e9c66a21da43f787e8a7f8417f8ff7b"
 
 QUAZIP_VER="multimc-3"
 LIBNBTPLUSPLUS_VER="multimc-0.6.1"
@@ -16,7 +16,6 @@ HOMEPAGE="https://multimc.org
 	https://github.com/MultiMC/MultiMC5"
 BASE_URI="https://github.com/MultiMC"
 SRC_URI="
-	https://github.com/AfoninZ/MultiMC5-Cracked/archive/${PV}.tar.gz -> ${P}.tar.gz
 	https://github.com/MultiMC/libnbtplusplus/archive/${LIBNBTPLUSPLUS_VER}.tar.gz -> libnbtplusplus-${LIBNBTPLUSPLUS_VER}.tar.gz
 	https://github.com/MultiMC/quazip/archive/${QUAZIP_VER}.tar.gz -> quazip-${QUAZIP_VER}.tar.gz
 "
@@ -44,13 +43,13 @@ RDEPEND="${COMMON_DEPEND}
 	x11-libs/libXrandr
 "
 
-S="${WORKDIR}/${MY_P}"
-
 src_unpack() {
 	default
-	rm -rf "${S}/libraries/libnbtplusplus" "${S}/libraries/quazip"
-	mv "${WORKDIR}/libnbtplusplus-${LIBNBTPLUSPLUS_VER}" "${S}/libraries/libnbtplusplus" || die
-	mv "${WORKDIR}/quazip-${QUAZIP_VER}" "${S}/libraries/quazip" || die
+	git-r3_fetch
+	git-r3_checkout
+	rm -rf "${WORKDIR}/${P}/libraries/libnbtplusplus" "${WORKDIR}/${P}/libraries/quazip"
+	mv "${WORKDIR}/libnbtplusplus-${LIBNBTPLUSPLUS_VER}" "${WORKDIR}/${P}/libraries/libnbtplusplus" || die
+	mv "${WORKDIR}/quazip-${QUAZIP_VER}" "${WORKDIR}/${P}/libraries/quazip" || die
 }
 
 src_configure() {
