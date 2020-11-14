@@ -6,7 +6,7 @@ EAPI=7
 inherit desktop xdg cmake
 
 MY_PN="MultiMC5"
-MY_P="${MY_PN}-${PV}"
+MY_P="${MY_PN}-Cracked-${PV}"
 
 QUAZIP_VER="multimc-3"
 LIBNBTPLUSPLUS_VER="multimc-0.6.1"
@@ -16,9 +16,9 @@ HOMEPAGE="https://multimc.org
 	https://github.com/MultiMC/MultiMC5"
 BASE_URI="https://github.com/MultiMC"
 SRC_URI="
-	${BASE_URI}/${MY_PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
-	${BASE_URI}/libnbtplusplus/archive/${LIBNBTPLUSPLUS_VER}.tar.gz -> libnbtplusplus-${LIBNBTPLUSPLUS_VER}.tar.gz
-	${BASE_URI}/quazip/archive/${QUAZIP_VER}.tar.gz -> quazip-${QUAZIP_VER}.tar.gz
+	https://github.com/AfoninZ/MultiMC5-Cracked/archive/${PV}.tar.gz -> ${P}.tar.gz
+	https://github.com/MultiMC/libnbtplusplus/archive/${LIBNBTPLUSPLUS_VER}.tar.gz -> libnbtplusplus-${LIBNBTPLUSPLUS_VER}.tar.gz
+	https://github.com/MultiMC/quazip/archive/${QUAZIP_VER}.tar.gz -> quazip-${QUAZIP_VER}.tar.gz
 "
 
 KEYWORDS="~amd64 ~x86"
