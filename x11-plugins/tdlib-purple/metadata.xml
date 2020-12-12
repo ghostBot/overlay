@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <use>
+    <flag name="rlottie">Enable animated sticker decoding</flag>
+    <flag name="system-rlottie">Use the system-wide <pkg>media-libs/rlottie</pkg> instead of bundled.</flag>
+    <flag name="webp">Enable decoding for web stickers</flag>
+    <flag name="voip">Enable voip support</flag>
+  </use>
+</pkgmetadata>
