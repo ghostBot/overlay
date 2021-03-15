@@ -93,5 +93,9 @@ src_test(){
 }
 
 src_install(){
-	escons  ${scons_var[@]} --prefix="${ED}"/usr --libdir="${ED}"/usr/$(get_libdir) install
+	escons  ${scons_var[@]} \
+		--prefix="${ED}"/usr \
+		--libdir="${ED}"/usr/$(get_libdir) \
+		--pulseaudio-module-dir="${ED}$(pulseaudio --dump-conf | sed -n -e 's/^dl-search-path\s=\s//p')" \
+		install
 }
