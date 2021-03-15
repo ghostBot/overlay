@@ -1,0 +1,11 @@
+diff -Nuar a/SConstruct b/SConstruct
+--- a/SConstruct	2020-04-05 19:19:54.000000000 +0000
++++ b/SConstruct	2021-03-12 06:06:22.457277494 +0000
+@@ -1107,7 +1107,6 @@
+     else:
+         env.Append(CXXFLAGS=[
+             '-fvisibility=hidden',
+-            '-O3',
+         ])
+ 
+     if compiler == 'gcc' and compiler_ver[:2] < (4, 6):
