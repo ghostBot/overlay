@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{7..9} )
-inherit python-any-r1 scons-utils toolchain-funcs cmake
+inherit python-any-r1 scons-utils cmake
 
 PULSE_VER="13.0"
 PULSE_DIR="${WORKDIR}/pulseaudio-${PULSE_VER}/"
@@ -12,7 +12,7 @@ OPENFEC_VER="1.4.2.4"
 CMAKE_USE_DIR="${WORKDIR}/openfec-${OPENFEC_VER}"
 BUILD_DIR="${WORKDIR}/openfec-${OPENFEC_VER}"_build
 
-IUSE="openfec pulseaudio test tools"
+IUSE="openfec pulseaudio sox test tools"
 
 DESCRIPTION="Toolkit for real-time audio streaming over the network"
 HOMEPAGE="https://roc-streaming.org/"
@@ -25,10 +25,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 RESTRICT="!test? ( test )"
 
-DEPEND="tools? ( dev-util/gengetopt )
-	pulseaudio? ( >=media-sound/pulseaudio-${PULSE_VER} )"
+REQUIRED_USE="sox? ( tools )"
+DEPEND="pulseaudio? ( >=media-sound/pulseaudio-${PULSE_VER} )
+	sox? ( media-sound/sox )"
 RDEPEND="${DEPEND}"
 BDEPEND="dev-util/ragel
+	tools? ( dev-util/gengetopt )
 	test? ( dev-util/cpputest )"
 
 PATCHES=(
@@ -51,26 +53,15 @@ src_configure(){
 		CXX=$(tc-getCXX)
 		$(usex openfec "--with-openfec-includes=${WORKDIR}/openfec-${OPENFEC_VER}/src --with-libraries=${WORKDIR}/openfec-${OPENFEC_VER}/bin/Gentoo/" "--disable-openfec")
 		$(usex pulseaudio "--enable-pulseaudio-modules --with-pulseaudio=${PULSE_DIR} --with-pulseaudio-build-dir=/usr/$(get_libdir)/pulseaudio" "--disable-pulseaudio")
+		$(usex sox "" "--disable-sox")
 		$(usex test "" "--disable-tests")
 		$(usex tools "" "--disable-tools")
 		--disable-examples
 		--disable-doc
-		--disable-sox
 		--disable-libunwind
 	)
 
-	if use pulseaudio; then
-		cd ${PULSE_DIR} || die
-		econf \
-			--enable-shared \
-			--disable-static \
-			--disable-tests \
-			--disable-manpages \
-			--disable-orc \
-			--disable-webrtc-aec \
-			--without-caps
-		cp config.h src/ || die
-	fi
+	use pulseaudio && sed -e "s/PA_VERSION/${PULSE_VER}/" "${FILESDIR}"/config.h > "${PULSE_DIR}"/src/config.h || die
 
 	if use openfec; then
 		# force static && DEBUG define for not erasing CFLAGS
