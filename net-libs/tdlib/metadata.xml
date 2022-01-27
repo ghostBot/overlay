@@ -2,6 +2,7 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
   <use>
+    <flag name="clang">Use Clang compiler instead of GCC</flag>
     <flag name="lto">Build using Link Time Optimizations (LTO)</flag>
   </use>
 </pkgmetadata>
