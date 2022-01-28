@@ -26,7 +26,8 @@ BDEPEND="
 		media-libs/libwebp:=
 	)
 "
-RDEPEND="net-im/pidgin"
+RDEPEND="net-im/pidgin
+	!x11-plugins/pidgin-telegram"
 
 src_configure() {
 	local mycmakeargs=(
