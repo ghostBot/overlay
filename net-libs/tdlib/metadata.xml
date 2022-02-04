@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-  <use>
-    <flag name="clang">Use Clang compiler instead of GCC</flag>
-    <flag name="lto">Build using Link Time Optimizations (LTO)</flag>
-  </use>
+	<use>
+		<flag name="clang">
+			Use Clang compiler instead of GCC
+		</flag>
+		<flag name="lto">
+			Build using Link Time Optimizations (LTO)
+		</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">tdlib/td</remote-id>
+	</upstream>
 </pkgmetadata>

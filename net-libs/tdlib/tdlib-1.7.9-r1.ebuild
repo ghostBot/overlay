@@ -13,6 +13,7 @@ LICENSE="Boost-1.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="clang java +lto test"
+REQUIRED_USE="java? ( !lto )"
 
 RDEPEND="
 	dev-libs/openssl
@@ -21,8 +22,10 @@ RDEPEND="
 "
 BDEPEND="
 	dev-util/gperf
-	>=dev-util/cmake-3.0.2
-	clang? ( >=sys-devel/clang-3.4:= )
+	clang? (
+		>=sys-devel/clang-3.4:=
+		sys-devel/lld
+	)
 "
 
 S="${WORKDIR}/td-7d41d9eaa58a6e0927806283252dc9e74eda5512"
@@ -44,6 +47,25 @@ src_prepare() {
 }
 
 src_configure() {
+	if use clang ; then
+			# Force clang
+			einfo "Enforcing the use of clang due to USE=clang ..."
+			AR=llvm-ar
+			CC=${CHOST}-clang
+			CXX=${CHOST}-clang++
+			NM=llvm-nm
+			RANLIB=llvm-ranlib
+			LDFLAGS+=" -fuse-ld=lld"
+	else
+			# Force gcc
+			einfo "Enforcing the use of gcc due to USE=-clang ..."
+			AR=gcc-ar
+			CC=${CHOST}-gcc
+			CXX=${CHOST}-g++
+			NM=gcc-nm
+			RANLIB=gcc-ranlib
+	fi
+
 	local mycmakeargs=(
 		-DTD_ENABLE_DOTNET=OFF
 		-DTD_ENABLE_JNI=$(usex java)
