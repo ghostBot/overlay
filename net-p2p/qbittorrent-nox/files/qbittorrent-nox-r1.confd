@@ -1,0 +1,14 @@
+# /etc/conf.d/qbittorrent-nox: config file for /etc/init.d/qbittorrent-nox
+
+QBITTORRENT_NOX_PROFILEDIR="${RC_PREFIX%/}/var/lib/qBittorrent/"
+
+# Any random options you want to pass to qbittorrent-nox
+QBITTORRENT_NOX_OPTS=""
+
+# Pid file to use (needs to be absolute path).
+
+QBITTORRENT_NOX_PIDFILE="${RC_PREFIX%/}/run/qbittorrent-nox.pid"
+
+# Path to the sshd binary (needs to be absolute path).
+
+QBITTORRENT_NOX_BINARY="${RC_PREFIX%/}/usr/bin/qbittorrent-nox"

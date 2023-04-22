@@ -1,0 +1,5 @@
+#!/sbin/openrc-run
+
+command="${QBITTORRENT_NOX_BINARY}"
+pidfile="${QBITTORRENT_NOX_PIDFILE}"
+command_args="${SSHD_OPTS} -o PidFile=${pidfile} -f ${SSHD_CONFIG}"
